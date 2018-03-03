@@ -1,6 +1,9 @@
 package com.stylefeng.guns.modular.housemanager.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,7 +63,16 @@ public class TblHouseController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        return tblHouseService.selectList(null);
+        //1.判断条件是否为空
+        if(ToolUtil.isEmpty(condition)){
+            //为空查询全部
+            return tblHouseService.selectList(null);
+        }else{
+            //不为空
+            EntityWrapper<TblHouse> entityWrapper=new EntityWrapper<TblHouse>();
+            Wrapper<TblHouse> wrapper = entityWrapper.like("house_user", condition);
+            return tblHouseService.selectList(wrapper);
+        }
     }
 
     /**
