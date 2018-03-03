@@ -7,13 +7,14 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="房屋编号" underline="true"/>
+                           <!-- <#input id="id" name="房屋编号" underline="true"/> 这里id数据库自增不应由我们自己赋值-->
                             <#input id="houseUser" name="业主名称" underline="true"/>
                             <#input id="houseAddress" name="房屋地址"/>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="houseDate" name="房屋交付时间" underline="true"/>
+                            <#input id="houseDate" name="房屋交付时间" underline="true" type="date"
+                            clickFun="laydate({istime: false, format: 'YYYY-MM-DD'})"/>
                             <#input id="houseDesc" name="房屋描述" underline="true"/>
                 </div>
             </div>
